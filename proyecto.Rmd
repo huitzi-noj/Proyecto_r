@@ -1,0 +1,57 @@
+Proyecto
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+deadhs_hand <- read_csv("deaths_handwashing.csv")
+
+deadhs_hand
+```
+
+2 El alarmante número de muertes
+
+```{r}
+Prop <- deadhs_hand %>%
+  mutate(deadhs_hand,proportion=deaths/births)
+Prop
+```
+3. Muerte en las clínicas
+
+```{r}
+ggplot(Prop,aes(x=year,y=proportion,color=clinic))+geom_line()
+```
+4. Comienza el lavado de manos
+
+```{r}
+clinic_1 <- read_csv("deaths_clinic_1.csv")
+clinic_1
+
+p_clinic_1 <- clinic_1 %>%
+  mutate(clinic_1,proportion=deaths/births)
+
+head(p_clinic_1)
+p_clinic_1
+```
+5. El efecto del lavado de manos
+
+```{r}
+ggplot(p_clinic_1,aes(x=date,y=proportion))+geom_line()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
