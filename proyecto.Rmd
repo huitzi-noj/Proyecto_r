@@ -3,6 +3,8 @@ Proyecto
 ```{r}
 library(tidyverse)
 library(ggplot2)
+library(lubridate)
+
 
 deadhs_hand <- read_csv("deaths_handwashing.csv")
 
@@ -31,14 +33,35 @@ p_clinic_1 <- clinic_1 %>%
   mutate(clinic_1,proportion=deaths/births)
 
 head(p_clinic_1)
-p_clinic_1
 ```
 5. El efecto del lavado de manos
 
 ```{r}
-ggplot(p_clinic_1,aes(x=date,y=proportion))+geom_line()
+ggplot(p_clinic_1,aes(x=date,y=proportion))+geom_line()+labs(x="DATE",y="PROPORTION")
+
+clinic_1
+clinic_year <- clinic_1 %>%
+  mutate(years=year(ymd(date)))%>%
+  group_by(years)%>%
+  summarize(mean_death = mean(deaths))
+
+ggplot(clinic_year,aes(x=years,y=mean_death))+geom_col()
+
+clinic_year
+clinic_1
 ```
 
+6. Lavado de manos resultados
+
+```{r}
+
+result_lavado <-clinic_1 %>%
+  mutate(año=year(ymd(date)))%>%
+  mutate(impulsar = )
+
+result_lavado
+clinic_1
+```
 
 
 
