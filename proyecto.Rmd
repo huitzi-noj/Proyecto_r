@@ -125,15 +125,41 @@ ggplot(fusion,aes(x=date,y=proportion,color = app_lavado))+geom_line()+labs(x="F
 7. lavado de manos, menos muertes
 
 ```{r}
-#7.1
+#7.1 y 7.2
 
 result_lavado%>%
-  group_by()%>%
-  summarise(p_clinic_1,mean_muertes=mean(proportion))
-
-result_lavado
-p_clinic_1
+  inner_join(p_clinic_1,by = c("date"="date","births"="births","deaths"="deaths"))%>%
+  group_by(app_lavado)%>%
+  summarise(mean_deaths = mean(proportion))
 ```
+
+```{r}
+#7.3
+inciso_7 <- result_lavado%>%
+  inner_join(p_clinic_1,by = c("date"="date","births"="births","deaths"="deaths"))%>%
+  group_by(app_lavado)%>%
+  summarise(mean_deaths = mean(proportion))
+
+print(inciso_7)
+```
+
+8. Análisis estadístico
+```{r}
+
+result_lavado%>%
+  inner_join(p_clinic_1,by = c("date"="date","births"="births","deaths"="deaths"))%>%
+  t.test(proportion ~ app_lavado)
+
+t.test(result_lavado,)
+p_clinic_1
+result_lavado
+```
+
+
+
+
+
+
 
 
 
