@@ -108,10 +108,6 @@ fusion <- clinic_1 %>%
   
 ggplot(fusion,aes(x=date,y=proportion,color = app_lavado))+geom_line()
 
-fusion
-clinic_1
-p_clinic_1
-result_lavado
 ```
 ```{r}
 #6.3
@@ -146,15 +142,14 @@ print(inciso_7)
 8. Análisis estadístico
 ```{r}
 
-result_lavado%>%
-  inner_join(p_clinic_1,by = c("date"="date","births"="births","deaths"="deaths"))%>%
-  t.test(proportion ~ app_lavado)
+a_esta<- result_lavado%>%
+  inner_join(p_clinic_1,by = c("date"="date","births"="births","deaths"="deaths"))
 
-t.test(result_lavado,)
-p_clinic_1
-result_lavado
+t.test(proportion ~ app_lavado, data=a_esta)
 ```
+#Conclusión
 
+Lo que nos indica lo anterior es que la probabilidad de muertes disminuyo significativamente en los años posteriores que se implementó la medida de higine del lavado de manos, esto nos muestra que una simple medida de higinie que ahora nos parece básica contribuyo al avance de la medicina, además que sea mucho más seguro cualquier tipo de tratamiento médico.
 
 
 
